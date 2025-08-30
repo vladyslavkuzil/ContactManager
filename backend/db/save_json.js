@@ -4,12 +4,14 @@ const path = require("path")
 
 const dataFile = path.join(__dirname, "contacts.json")
 
-const loadContacts = () => {
+console.log(dataFile)
+
+const loadContacts = (filePath) => {
     try {
-        if (!fs.existsSync(dataFile)) {
+        if (!fs.existsSync(filePath)) {
             return []
         }
-        const contacts = fs.readFileSync(dataFile, "utf-8")
+        const contacts = fs.readFileSync(filePath, "utf-8")
         if (!contacts) {
             return []
         }
@@ -19,8 +21,8 @@ const loadContacts = () => {
     }
 }
 
-const saveContacts = (contacts) => {
-    fs.writeFileSync(dataFile, JSON.stringify(contacts, null, 2))
+const saveContacts = (contacts, filePath) => {
+    fs.writeFileSync(filePath, JSON.stringify(contacts, null, 2))
 }
 
 module.exports = {saveContacts, loadContacts}

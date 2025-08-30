@@ -52,7 +52,16 @@ const loadContacts = async () => {
     
     contacts.forEach(element => {
         const li = document.createElement("li")
-        li.textContent = `name: ${element.name} - email: ${element.email} - phone: ${element.phone} - address: ${element.address}`      
+        li.className = "contact-item";
+        li.innerHTML = `
+            <div class="contact-info">
+                <div class="avatar">${element.name ? element.name[0].toUpperCase() : "?"}</div>
+                    <div class="meta">
+                        <div class="name">${element.name}</div>
+                        <div class="sub">${element.email} &bull; ${element.phone} &bull; ${element.address}</div>
+                    </div>
+                </div>
+            `;
         contactsList.appendChild(li)
     }); 
 }
@@ -82,19 +91,18 @@ const createContact = async (newContact) => {
 
 createForm.addEventListener("submit", (event) => {
     event.preventDefault()    
+    
     const name = document.getElementById("name").value.trim()
     const email = document.getElementById("email").value.trim()
     const phone = document.getElementById("phone").value.trim()
     const address = document.getElementById("address").value.trim()
 
-    const nameRegex = /^[A-Za-z]{1,16}$/ 
-    const emailRegex = /^\w+@[A-Za-z]{3,}\.[A-Za-z]{2,}$/
-    const phoneRegex = /^\d{9}$/
-    const addressRegex = /^\w+$/
-
     const newContact = { name, email, phone, address }
+   
     let isDataCorrect = false
+   
     isDataCorrect = checkData(newContact)
+    
     if (isDataCorrect) {
         createContact(newContact)
         createForm.reset()

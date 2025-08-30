@@ -1,4 +1,5 @@
 const { saveContacts, loadContacts} = require("../db/save_json")
+const Contact = require("../models/Contact")
 
 const getContacts = (req, res) => {
     const contacts = loadContacts()
@@ -7,10 +8,10 @@ const getContacts = (req, res) => {
 }
 
 
-const addContact = (req, res) => {
-    const constactsJson = req.body 
-    console.log(constactsJson)
-    let contactsArr = loadContacts()
+const addContact = (req, res) => { 
+    
+    const newContact = new Contact(req.body)
+    let contactsArr = newContact.loadContacts()
     console.log("1",contactsArr)
     if (!Array.isArray(contactsArr)) {
         contactsArr = []
