@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <link rel="stylesheet" href="style.css" />
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Contact Manager</title>
+  </head>
+  <body>
+    <header class="site-header">
+      <div class="container header-inner">
+        <h1 class="brand">Smart Contact Manager</h1>
+        <p class="tagline">Add, search and manage your contacts ✉️📱</p>
+      </div>
+    </header>
+
+    <main class="container">
+      <section class="panel form-panel" aria-labelledby="add-contact-heading">
+        <h2 id="add-contact-heading">Add Contact</h2>
+
+        <form id="contact-form" class="contact-form" novalidate>
+          <div class="row">
+            <label for="name">Name</label>
+            <input
+              id="name"
+              name="name"
+              type="text"
+              placeholder="John Doe"
+              required
+            />
+          </div>
+
+          <div class="row">
+            <label for="email">Email</label>
+            <input
+              id="email"
+              name="email"
+              type="email"
+              placeholder="john@example.com"
+              required
+            />
+          </div>
+
+          <div class="row">
+            <label for="phone">Phone</label>
+            <input
+              id="phone"
+              name="phone"
+              type="tel"
+              placeholder="+1-555-1234"
+            />
+          </div>
+
+          <div class="row">
+            <label for="address">Address</label>
+            <input
+              id="address"
+              name="address"
+              type="text"
+              placeholder="21 Apple St, City"
+            />
+          </div>
+
+          <div class="form-actions">
+            <button type="submit" class="btn primary" id="addButton">
+              Add Contact
+            </button>
+            <button type="reset" class="btn">Clear</button>
+          </div>
+
+          <div
+            id="form-message"
+            role="status"
+            aria-live="polite"
+            class="form-message"
+          ></div>
+        </form>
+      </section>
+
+      <section class="panel search-panel" aria-labelledby="search-heading">
+        <h2 id="search-heading">Search & Controls</h2>
+
+        <div class="controls">
+          <input
+            id="search-input"
+            type="search"
+            placeholder="Search by name, email or phone"
+          />
+          <button id="refresh-btn" class="btn">Refresh</button>
+          <button id="sort-btn" class="btn">Sort A → Z</button>
+        </div>
+
+        <div id="stats" class="stats" aria-live="polite">
+          <!-- domain stats will be injected here -->
+          <strong>Contacts:</strong> <span id="total-count">0</span>
+        </div>
+      </section>
+
+      <section class="panel list-panel" aria-labelledby="list-heading">
+        <h2 id="list-heading">Contacts</h2>
+
+        <ul id="contact-list" class="contact-list">
+          <!-- contacts rendered here by app.js -->
+        </ul>
+
+        <div id="empty-msg" class="empty-msg">
+          No contacts yet — add your first contact above.
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div class="container">
+        <small>© Smart Contact Manager — Practice Project</small>
+      </div>
+    </footer>
+    <script src="script.js"></script>
+  </body>
+</html>
