@@ -3,23 +3,26 @@ const path = require("path")
 
 
 class Contact {
+    
+    static dataFile = path.join(__dirname, "../db/contacts.json");
+    
     constructor(obj) {
-        this.name = obj[name]
-        this.email = obj[email]
-        this.phone = obj[phone] 
-        this.address = obj[address]
+        this.name = obj.name
+        this.email = obj.email
+        this.phone = obj.phone
+        this.address = obj.address
     }
 
     toJSON() {
         return {name: this.name, email: this.email, phone: this.phone, address: this.address }
     }
 
-    loadContacts(filePath) {
+    static loadContacts() {
         try {
-            if (!fs.existsSync(filePath)) {
+            if (!fs.existsSync(Contact.dataFile)) {
                 return []
             }
-            const contacts = fs.readFileSync(filePath, "utf-8")
+            const contacts = fs.readFileSync(Contact.dataFile, "utf-8")
             if (!contacts) {
                 return []
             }
@@ -29,8 +32,8 @@ class Contact {
         }
     }
 
-    saveContacts(contacts, filePath){
-        fs.writeFileSync(filePath, JSON.stringify(contacts, null, 2))
+    static saveContacts(contacts){
+        fs.writeFileSync(Contact.dataFile, JSON.stringify(contacts, null, 2))
     }
 }
 
