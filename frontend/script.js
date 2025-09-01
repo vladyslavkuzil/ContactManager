@@ -1,6 +1,10 @@
 const createForm = document.getElementById("contact-form")
 const contactsList = document.getElementById("contact-list")
 const emptyMsg = document.getElementById("empty-msg")
+const contactCount = document.getElementById("total-count")
+const inputS = document.getElementById("search-input")
+const strBtn = document.getElementById("sort-btn")
+const refresh = document.getElementById("refresh-btn")
 
 
 const checkData = (contact) => {
@@ -40,7 +44,7 @@ const checkData = (contact) => {
     } 
     return true
 }
-    
+
 
 const loadContacts = async () => {
     const response = await fetch("/contacts")
@@ -49,21 +53,32 @@ const loadContacts = async () => {
     if (contacts) {
         emptyMsg.textContent = ""
     }
-    
+    let count = 0
     contacts.forEach(element => {
+        count++
         const li = document.createElement("li")
         li.className = "contact-item";
         li.innerHTML = `
             <div class="contact-info">
-                <div class="avatar">${element.name ? element.name[0].toUpperCase() : "?"}</div>
+                <div class="info-left">
+                    <div class="avatar">${element.name ? element.name[0].toUpperCase() : "?"}</div>
                     <div class="meta">
-                        <div class="name">${element.name}</div>
-                        <div class="sub">${element.email} &bull; ${element.phone} &bull; ${element.address}</div>
-                    </div>
+                    <div class="name">${element.name}</div>
+                    <div class="sub">${element.email} &bull; ${element.phone} &bull; ${element.address}</div>
                 </div>
+            </div>
+            
+                <div class="actions">
+                    <button class="update-btn"><i class="fas fa-pencil-alt"></i></button>
+                    <button class="delete-btn"><i class="fas fa-trash-alt"></i></button>
+                </div>
+            </div>
+
+                
             `;
         contactsList.appendChild(li)
     }); 
+    contactCount.textContent = count
 }
 
 window.onload = loadContacts
@@ -109,3 +124,64 @@ createForm.addEventListener("submit", (event) => {
     }
     
 });
+inputS.addEventListener("input", async () => {
+    const response = await fetch(`/contacts/search?criteria=${inputS.value}`)
+    const contacts = await response.json()
+    contactsList.innerHTML = ""
+    let count = 0
+    contacts.forEach(element => {
+        count++
+        const li = document.createElement("li")
+        li.className = "contact-item";
+        li.innerHTML = `
+            <div class="contact-info">
+                <div class="info-left">
+                    <div class="avatar">${element.name ? element.name[0].toUpperCase() : "?"}</div>
+                    <div class="meta">
+                    <div class="name">${element.name}</div>
+                    <div class="sub">${element.email} &bull; ${element.phone} &bull; ${element.address}</div>
+                </div>
+            </div>
+            
+                <div class="actions">
+                    <button class="update-btn"><i class="fas fa-pencil-alt"></i></button>
+                    <button class="delete-btn"><i class="fas fa-trash-alt"></i></button>
+                </div>
+            </div>
+                
+            `;
+        contactsList.appendChild(li)
+    }); 
+    contactCount.textContent = count
+});
+strBtn.addEventListener("click", async () => {
+    const response = await fetch("/contacts/sort")
+    const contacts = await response.json()
+    contactsList.innerHTML = ""
+    let count = 0
+    contacts.forEach(element => {
+        count++
+        const li = document.createElement("li")
+        li.className = "contact-item";
+        li.innerHTML = `
+            <div class="contact-info">
+                <div class="info-left">
+                    <div class="avatar">${element.name ? element.name[0].toUpperCase() : "?"}</div>
+                    <div class="meta">
+                    <div class="name">${element.name}</div>
+                    <div class="sub">${element.email} &bull; ${element.phone} &bull; ${element.address}</div>
+                </div>
+            </div>
+            
+                <div class="actions">
+                    <button class="update-btn"><i class="fas fa-pencil-alt"></i></button>
+                    <button class="delete-btn"><i class="fas fa-trash-alt"></i></button>
+                </div>
+            </div>
+                
+            `;
+        contactsList.appendChild(li)
+    }); 
+    contactCount.textContent = count
+})
+refresh.addEventListener("click", () => loadContacts())

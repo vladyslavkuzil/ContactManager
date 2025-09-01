@@ -17,6 +17,10 @@ class Contact {
         return {name: this.name, email: this.email, phone: this.phone, address: this.address }
     }
 
+    static contactsCount() {
+        return Contact.loadContacts().length
+    }
+
     static loadContacts() {
         try {
             if (!fs.existsSync(Contact.dataFile)) {
@@ -34,6 +38,22 @@ class Contact {
 
     static saveContacts(contacts){
         fs.writeFileSync(Contact.dataFile, JSON.stringify(contacts, null, 2))
+    }
+
+    static filterContacts(query) {
+        let contacts = Contact.loadContacts()
+        let matches = contacts.filter((contact) => {
+            return (
+                contact.name.toLowerCase().includes(query.toLowerCase()) ||
+                contact.phone.includes(query) ||
+                contact.email.toLowerCase().includes(query.toLowerCase())    
+            )
+        })
+        return matches
+    }
+
+    static sortContact() {
+        return Contact.loadContacts().sort((a, b) => a.name.toLowerCase().localeCompare(b.name.toLowerCase()))
     }
 }
 

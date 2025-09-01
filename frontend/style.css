@@ -16,12 +16,12 @@
 
 /* layout */
 * {
-    box-sizing: border-box
+    box-sizing: border-box;
 }
 
 html,
 body {
-    height: 100%
+    height: 100%;
 }
 
 body {
@@ -58,13 +58,13 @@ body {
 .brand {
     margin: 0;
     font-size: 1.25rem;
-    font-weight: 700
+    font-weight: 700;
 }
 
 .tagline {
     margin: 0;
     color: rgba(255, 255, 255, 0.9);
-    font-size: .95rem
+    font-size: .95rem;
 }
 
 /* panels */
@@ -114,10 +114,11 @@ body {
     background: white;
     cursor: pointer;
     font-weight: 600;
+    transition: transform 0.2s ease;
 }
 
 .btn:hover {
-    transform: translateY(-1px)
+    transform: translateY(-1px);
 }
 
 .btn.primary {
@@ -171,11 +172,14 @@ body {
 
 .contact-info {
     display: flex;
-    gap: 12px;
+    justify-content: space-between;
+    /* pushes children apart */
     align-items: center;
+    /* vertically center content */
+    gap: 12px;
     min-width: 0;
+    flex: 1;
 }
-
 .avatar {
     width: 44px;
     height: 44px;
@@ -195,7 +199,7 @@ body {
     font-weight: 700;
     white-space: nowrap;
     overflow: hidden;
-    text-overflow: ellipsis
+    text-overflow: ellipsis;
 }
 
 .meta .sub {
@@ -203,47 +207,86 @@ body {
     color: var(--muted);
     white-space: nowrap;
     overflow: hidden;
-    text-overflow: ellipsis
+    text-overflow: ellipsis;
 }
 
 /* item actions */
 .item-actions {
     display: flex;
-    gap: 8px
+    gap: 8px;
 }
 
+/* Icon button styles for update/delete */
 .icon-btn {
     background: transparent;
     border: 1px solid rgba(15, 23, 42, 0.06);
     padding: 8px;
     border-radius: 8px;
     cursor: pointer;
+    transition: background-color 0.2s ease, transform 0.2s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.icon-btn i {
+    font-size: 1rem;
+}
+
+/* Update button (green theme) */
+.update-btn {
+    color: var(--success);
+}
+
+.update-btn:hover {
+    background-color: rgba(16, 185, 129, 0.1);
+    transform: translateY(-1px);
+}
+
+.update-btn:active {
+    background-color: rgba(16, 185, 129, 0.2);
+    transform: translateY(0);
+}
+
+/* Delete button (red theme) */
+.delete-btn {
+    color: var(--danger);
+}
+
+.delete-btn:hover {
+    background-color: rgba(239, 68, 68, 0.1);
+    transform: translateY(-1px);
+}
+
+.delete-btn:active {
+    background-color: rgba(239, 68, 68, 0.2);
+    transform: translateY(0);
 }
 
 .empty-msg {
     text-align: center;
     color: var(--muted);
     padding: 12px;
-    margin-top: 12px
+    margin-top: 12px;
 }
 
 /* stats */
 .stats {
     margin-top: 12px;
-    color: var(--muted)
+    color: var(--muted);
 }
 
 /* footer */
 .site-footer {
     padding: 20px 0;
     text-align: center;
-    color: var(--muted)
+    color: var(--muted);
 }
 
 /* responsive */
 @media (min-width:900px) {
     .header-inner {
-        gap: 24px
+        gap: 24px;
     }
 }
 
@@ -251,14 +294,34 @@ body {
     .contact-form {
         display: grid;
         grid-template-columns: 1fr 1fr;
-        gap: 12px
+        gap: 12px;
     }
 
     .contact-form .row {
-        margin-bottom: 0
+        margin-bottom: 0;
     }
 
     .form-actions {
-        grid-column: 1/-1
+        grid-column: 1/-1;
     }
+}
+
+.contact-info {
+    display: flex;
+    justify-content: space-between;
+    /* avatar+meta left, actions right */
+    align-items: center;
+    gap: 12px;
+}
+
+.info-left {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    /* space between avatar and meta */
+}
+
+.actions {
+    display: flex;
+    gap: 8px;
 }

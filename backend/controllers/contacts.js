@@ -22,4 +22,20 @@ const addContact = (req, res) => {
     Contact.saveContacts(contactsArr) // Save the whole array!
     res.status(201).json({message: "Contact added"})
 } 
-module.exports = {getContacts,addContact}
+
+
+const searchContacts = (req, res) => {
+    const query = req.query.criteria || ""
+    const newContact = Contact.filterContacts(query)
+    res.status(200).json(newContact)
+}
+
+const sortContacts = (req, res) => {
+    res.status(200).json(Contact.sortContact())
+}
+
+
+const deleteContact = (req, res) => {
+    
+}
+module.exports = {getContacts,addContact, searchContacts, sortContacts}
