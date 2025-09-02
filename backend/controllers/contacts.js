@@ -8,17 +8,13 @@ const getContacts = (req, res) => {
 
 
 const addContact = (req, res) => { 
-    
-    const newContact = new Contact(req.body)
+
+    const newContact = new Contact(Contact.contactsCount()+1, req.body)
     let contactsArr = Contact.loadContacts()
-    console.log("1",contactsArr)
     if (!Array.isArray(contactsArr)) {
         contactsArr = []
     }
-
     contactsArr.push(newContact.toJSON())
-
-    console.log(newContact.toJSON())
     Contact.saveContacts(contactsArr) // Save the whole array!
     res.status(201).json({message: "Contact added"})
 } 
@@ -36,6 +32,15 @@ const sortContacts = (req, res) => {
 
 
 const deleteContact = (req, res) => {
-    
+    const idx = parseInt(req.params.index, 10);
+    let contacts = Contact.loadContacts()
+    if (idx >= 0 && idx < contacts.length) {
+        contacts.splice(idx, 1)
+        Contact.saveContacts(contacts)
+        res.json({ msg: "Contact deleted" })
+    } else {
+        res.status(404).json( { msg: "Contact not found" } )
+    }
+
 }
-module.exports = {getContacts,addContact, searchContacts, sortContacts}
+module.exports = {getContacts,addContact, searchContacts, sortContacts, deleteContact}

@@ -6,7 +6,8 @@ class Contact {
     
     static dataFile = path.join(__dirname, "../db/contacts.json");
     
-    constructor(obj) {
+    constructor(id, obj) {
+        this.id = id
         this.name = obj.name
         this.email = obj.email
         this.phone = obj.phone
@@ -14,7 +15,7 @@ class Contact {
     }
 
     toJSON() {
-        return {name: this.name, email: this.email, phone: this.phone, address: this.address }
+        return {id: this.id, name: this.name, email: this.email, phone: this.phone, address: this.address }
     }
 
     static contactsCount() {
