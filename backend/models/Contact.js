@@ -18,6 +18,16 @@ class Contact {
         return {id: this.id, name: this.name, email: this.email, phone: this.phone, address: this.address }
     }
 
+    static findContact(id) {
+        const contacts = Contact.loadContacts()
+        
+        for (let i = 0; i < contacts.length; i++) {
+            if (contacts[i]["id"] == id) {
+                return contacts[i]
+            }
+        }
+        return null}
+
     static contactsCount() {
         return Contact.loadContacts().length
     }
@@ -55,6 +65,14 @@ class Contact {
 
     static sortContact() {
         return Contact.loadContacts().sort((a, b) => a.name.toLowerCase().localeCompare(b.name.toLowerCase()))
+    }
+    static getID() {
+        const contacts = Contact.loadContacts()
+        if (contacts.length >= 1) {
+            return contacts[contacts.length-1]["id"]+1
+        } else {
+            return 1
+        }
     }
 }
 

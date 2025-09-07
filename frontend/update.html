@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <link rel="stylesheet" href="updateStyles.css" />
+    <meta charset="UTF-8" />
+    <title>Update Contact</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div class="container">
+      <h2>Update Contact</h2>
+      <form id="update-form">
+        <div class="row">
+          <label for="name">Name:</label>
+          <input id="name" name="name" />
+        </div>
+        <div class="row">
+          <label for="email">Email:</label>
+          <input id="email" name="email" />
+        </div>
+        <div class="row">
+          <label for="phone">Phone:</label>
+          <input id="phone" name="phone" />
+        </div>
+        <div class="row">
+          <label for="address">Address:</label>
+          <input id="address" name="address" />
+        </div>
+        <div class="form-actions">
+          <button type="submit" class="btn primary">Update</button>
+          <a href="index.html" class="btn">Cancel</a>
+        </div>
+      </form>
+      <div id="notification" class="notification"></div>
+      <div id="form-message" class="form-message"></div>
+    </div>
+    <script src="update.js"></script>
+  </body>
+</html>

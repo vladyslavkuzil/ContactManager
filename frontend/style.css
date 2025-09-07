@@ -235,6 +235,7 @@ body {
 
 /* Update button (green theme) */
 .update-btn {
+    height: 30px;
     color: var(--success);
 }
 

@@ -1,0 +1,113 @@
+/* Update page styles */
+.container {
+    max-width: 500px;
+    margin: 40px auto;
+    background: var(--card, #ffffff);
+    padding: 24px;
+    border-radius: var(--radius, 10px);
+    box-shadow: var(--shadow, 0 6px 18px rgba(32, 33, 36, 0.08));
+}
+
+h2 {
+    margin-top: 0;
+    margin-bottom: 20px;
+    font-size: 1.5rem;
+    font-weight: 700;
+    text-align: center;
+    color: var(--accent-600, #1e40af);
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.row {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+label {
+    font-size: 0.9rem;
+    color: var(--muted, #6b7280);
+    font-weight: 500;
+}
+
+input {
+    padding: 10px 12px;
+    border: 1px solid #e6eef8;
+    border-radius: 8px;
+    font-size: 1rem;
+    background: #fbfdff;
+}
+
+input:focus {
+    border-color: var(--accent, #2563eb);
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.2);
+}
+
+.form-actions {
+    display: flex;
+    justify-content: space-between;
+    gap: 12px;
+    margin-top: 12px;
+}
+
+.btn {
+    flex: 1;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    padding: 10px 14px;
+    border-radius: 8px;
+    font-weight: 600;
+    cursor: pointer;
+    border: 1px solid rgba(15, 23, 42, 0.08);
+    background: #ffffff;
+    transition: all 0.2s ease;
+}
+
+.btn:hover {
+    transform: translateY(-1px);
+    background: #f9fafb;
+}
+
+.btn.primary {
+    background: var(--accent, #2563eb);
+    color: white;
+    border: none;
+    box-shadow: 0 6px 18px rgba(37, 99, 235, 0.18);
+}
+
+.btn.primary:hover {
+    background: var(--accent-600, #1e40af);
+}
+
+.form-message {
+    margin-top: 16px;
+    font-size: 0.95rem;
+    text-align: center;
+    color: var(--danger, #ef4444);
+}
+.notification {
+    position: fixed;
+    top: 20px;
+    right: -300px;
+    /* hidden off-screen */
+    background: #4caf50;
+    color: white;
+    padding: 12px 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    font-size: 16px;
+    transition: right 0.5s ease-in-out;
+    z-index: 1000;
+}
+
+.notification.show {
+    right: 20px;
+    /* slides into view */
+}

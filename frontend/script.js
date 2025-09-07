@@ -45,16 +45,65 @@ const checkData = (contact) => {
     return true
 }
 
+const addContactElements = (contacts) => {
+    let count = 0
+        contacts.forEach(element => {
+            count++
+            const li = document.createElement("li")
+            li.className = "contact-item";
+            li.innerHTML = `
+                <div class="contact-info">
+                    <div class="info-left">
+                        <div class="avatar">${element.name ? element.name[0].toUpperCase() : "?"}</div>
+                        <div class="meta">
+                        <div class="name">${element.name}</div>
+                        <div class="sub">${element.email} &bull; ${element.phone} &bull; ${element.address}</div>
+                    </div>
+                </div>
+                
+                    <div class="actions">
+                        <a class="update-btn" href="update.html?id=${element.id}"><button class="update-btn", data-index="${element.id}"><i class="fas fa-pencil-alt"></i></button></a>
+                        <button class="delete-btn", data-index="${element.id}"><i class="fas fa-trash-alt"></i></button>
+                    </div>
+                </div>
+
+                
+                `;
+        contactsList.appendChild(li)
+    }); 
+    contactCount.textContent = count
+    const deleteBtns = document.querySelectorAll(".delete-btn")
+    deleteBtns.forEach((btn) => {
+        btn.addEventListener("click", async (e) => {
+            const indexOfButton = e.currentTarget.getAttribute("data-index")
+            const response = await fetch(`/contacts/${indexOfButton}`, {
+                method: "DELETE",
+            })  
+            loadContacts()
+        })
+    }) 
+    /*
+    updateBtns.forEach((btn) => {
+        btn.addEventListener("click", async (e) => {
+            const indexOfButton = e.currentTarget.getAttribute("data-index")
+            const response = await fetch()
+            loadContacts()
+        })
+    })
+    */
+}
 
 const loadContacts = async () => {
     const response = await fetch("/contacts")
     const contacts = await response.json()  
     contactsList.innerHTML = ""
-    if (contacts) {
+    if (contacts.length !== 0) {
         emptyMsg.textContent = ""
     }
+    /*
     let count = 0
     contacts.forEach(element => {
+        count++
         const li = document.createElement("li")
         li.className = "contact-item";
         li.innerHTML = `
@@ -68,8 +117,8 @@ const loadContacts = async () => {
             </div>
             
                 <div class="actions">
-                    <button class="update-btn"><i class="fas fa-pencil-alt"></i></button>
-                    <button class="delete-btn", data-index="${count++}"><i class="fas fa-trash-alt"></i></button>
+                    <button class="update-btn", data-index="${element.id}"><i class="fas fa-pencil-alt"></i></button>
+                    <button class="delete-btn", data-index="${element.id}"><i class="fas fa-trash-alt"></i></button>
                 </div>
             </div>
 
@@ -88,6 +137,8 @@ const loadContacts = async () => {
             loadContacts()
         })
     })
+    */
+    addContactElements(contacts)
 
 }
 
@@ -138,8 +189,10 @@ inputS.addEventListener("input", async () => {
     const response = await fetch(`/contacts/search?criteria=${inputS.value}`)
     const contacts = await response.json()
     contactsList.innerHTML = ""
+    /*
     let count = 0
     contacts.forEach(element => {
+        count++
         const li = document.createElement("li")
         li.className = "contact-item";
         li.innerHTML = `
@@ -151,11 +204,13 @@ inputS.addEventListener("input", async () => {
                     <div class="sub">${element.email} &bull; ${element.phone} &bull; ${element.address}</div>
                 </div>
             </div>
+            
                 <div class="actions">
-                    <<button class="update-btn"><i class="fas fa-pencil-alt"></i></button>
-                    <button class="delete-btn", data-index="${count++}"><i class="fas fa-trash-alt"></i></button>
+                    <button class="update-btn", data-index="${element.id}"><i class="fas fa-pencil-alt"></i></button>
+                    <button class="delete-btn", data-index="${element.id}"><i class="fas fa-trash-alt"></i></button>
                 </div>
             </div>
+
                 
             `;
         contactsList.appendChild(li)
@@ -171,13 +226,17 @@ inputS.addEventListener("input", async () => {
             loadContacts()
         })
     })
+    */
+    addContactElements(contacts)
 });
 strBtn.addEventListener("click", async () => {
     const response = await fetch("/contacts/sort")
     const contacts = await response.json()
     contactsList.innerHTML = ""
+    /*
     let count = 0
     contacts.forEach(element => {
+        count++
         const li = document.createElement("li")
         li.className = "contact-item";
         li.innerHTML = `
@@ -190,8 +249,8 @@ strBtn.addEventListener("click", async () => {
                 </div>
             </div>
                 <div class="actions">
-                    <button class="update-btn"><i class="fas fa-pencil-alt"></i></button>
-                    <button class="delete-btn", data-index="${count++}"><i class="fas fa-trash-alt"></i></button>
+                    <button class="update-btn", data-index="${element.id}"><i class="fas fa-pencil-alt"></i></button>
+                    <button class="delete-btn", data-index="${element.id}"><i class="fas fa-trash-alt"></i></button>
                 </div>
             </div>
                 
@@ -209,6 +268,8 @@ strBtn.addEventListener("click", async () => {
             loadContacts()
         })
     })
+    */
+    addContactElements(contacts)
 })
 refresh.addEventListener("click", () => loadContacts())
 
